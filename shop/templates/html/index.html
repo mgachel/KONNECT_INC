@@ -1,0 +1,41 @@
+{% extends 'html/base.html' %}
+
+{% block content %}
+    <header class="hero">
+        <h1>Welcome to KONNECT INC</h1>
+        <p>Your one-stop shop for the latest products.</p>
+        <button class="shop-now-btn" onclick="document.querySelector('.categories').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+    </header>
+
+    <section class="categories">
+        <h2>Our Products</h2>
+        <div class="category-tabs">
+            {% for category in categories %}
+                <button class="category-tab {% if forloop.first %}active{% endif %}" 
+                    data-category="{{ category.id }}">
+                    {{ category.name }}
+                </button>
+            {% endfor %}
+        </div>
+        <div class= "products-container">
+            {% for category in categories %}
+            <div class="category-products {% if forloop.first %}active{% endif %}" 
+                 data-category="{{ category.id }}">
+                <div class="products-grid">
+                    {% for product in category.products_set.all %}
+                    <div class="product-card" data-product-id="{{ product.id }}">
+                        <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                        <h4>{{ product.product_name }}</h4>
+                        <p class="price">₵{{ product.product_price }}</p>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                    {% empty %}
+                    <p class="no-products">No products in this category yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
