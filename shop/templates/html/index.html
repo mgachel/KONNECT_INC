@@ -1,4 +1,5 @@
 {% extends 'html/base.html' %}
+{% load static %}
 
 {% block content %}
     <header class="hero">
@@ -24,7 +25,7 @@
                 <div class="products-grid">
                     {% for product in category.products_set.all %}
                     <div class="product-card" data-product-id="{{ product.id }}">
-                        <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                        <img src="/static/{{ product.product_image }}" alt="{{ product.product_name }}">
                         <h4>{{ product.product_name }}</h4>
                         <p class="price">₵{{ product.product_price }}</p>
                         <button class="add-to-cart-btn">Add to Cart</button>
