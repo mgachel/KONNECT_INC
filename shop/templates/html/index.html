@@ -1,15 +1,14 @@
 {% extends 'html/base.html' %}
-{% load static %}
 
 {% block content %}
     <header class="hero">
         <h1>Welcome to KONNECT INC</h1>
-        <p>Your one-stop shop for the latest products.</p>
+        <p>Your one-stop shop for the latest tech products.</p>
         <button class="shop-now-btn" onclick="document.querySelector('.categories').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
     </header>
 
     <section class="categories">
-        <h2>Our Products</h2>
+        <h2>Product Categories</h2>
         <div class="category-tabs">
             {% for category in categories %}
                 <button class="category-tab {% if forloop.first %}active{% endif %}" 

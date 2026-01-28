@@ -16,7 +16,7 @@ db.sqlite3
 db.sqlite3-journal
 staticfiles/
 
-# Keep media files in git (for Render deployment)
+# Media files (uncomment if you don't want to track uploaded files)
 # media/
 
 # Environment
