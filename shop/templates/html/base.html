@@ -78,6 +78,12 @@
             transform: scale(1.05);
         }
 
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
         .logo-icon {
             width: 35px;
             height: 35px;
@@ -1351,7 +1357,7 @@
 <body>
     <nav>
         <a href="/" class="logo">
-            <img src="{% static 'logo.png' %}" alt="KONNECT ICN logo">
+            <img src="{% static 'images/logo.png' %}" alt="KONNECT INC logo">
         </a>
         <div class="nav-actions">
             <button class="cart-icon" id="openCart">
