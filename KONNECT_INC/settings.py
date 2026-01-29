@@ -136,9 +136,7 @@ STATICFILES_DIRS = [
 # WhiteNoise for serving static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Cloudinary Configuration (for production media storage)
 CLOUDINARY_STORAGE = {
@@ -148,8 +146,7 @@ CLOUDINARY_STORAGE = {
 }
 
 # Use Cloudinary for media files in production
-if not DEBUG and os.environ.get('CLOUDINARY_CLOUD_NAME'):
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Default primary key field type
