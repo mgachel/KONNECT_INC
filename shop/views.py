@@ -179,13 +179,17 @@ def verify_payment(request):
             # Update order status
             try:
                 order = Order.objects.get(order_id=reference)
-                order.status = 'paid'
-                order.save()
                 
-                # Update product stock
-                for item in order.items.all():
-                    item.product.product_stock -= item.quantity
-                    item.product.save()
+                # Only update stock if order wasn't already paid (prevent double reduction)
+                if order.status != 'paid':
+                    order.status = 'paid'
+                    order.save()
+                    
+                    # Reduce product stock by quantity purchased
+                    for item in order.items.all():
+                        product = item.product
+                        product.product_stock -= item.quantity
+                        product.save()
                 
                 return JsonResponse({
                     'success': True,

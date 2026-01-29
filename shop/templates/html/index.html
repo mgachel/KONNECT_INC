@@ -3,7 +3,7 @@
 {% block content %}
     <header class="hero">
         <h1>Welcome to KONNECT INC</h1>
-        <p>Your one-stop shop for the latest tech products.</p>
+        <p>Your one-stop shop for the latest products.</p>
         <button class="shop-now-btn" onclick="document.querySelector('.categories').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
     </header>
 
@@ -27,6 +27,7 @@
                         <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                         <h4>{{ product.product_name }}</h4>
                         <p class="price">₵{{ product.product_price }}</p>
+                        <p class="stock">{{ product.product_stock }}</p>
                         <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
                     {% empty %}
