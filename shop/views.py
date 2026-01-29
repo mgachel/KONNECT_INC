@@ -235,3 +235,24 @@ def paystack_webhook(request):
             return JsonResponse({'status': 'error'}, status=400)
     
     return JsonResponse({'status': 'method not allowed'}, status=405)
+
+
+
+
+
+def debug_cloudinary(request):
+    """Temporary debug view - DELETE AFTER TESTING"""
+    from django.http import JsonResponse
+    from django.conf import settings
+    from .models import Products
+    
+    return JsonResponse({
+        'cloud_name': settings.CLOUDINARY_STORAGE.get('CLOUD_NAME', 'NOT SET'),
+        'api_key_set': bool(settings.CLOUDINARY_STORAGE.get('API_KEY')),
+        'api_secret_set': bool(settings.CLOUDINARY_STORAGE.get('API_SECRET')),
+        'default_storage': getattr(settings, 'DEFAULT_FILE_STORAGE', 'NOT SET'),
+        'products': [
+            {'name': p.product_name, 'image_url': p.product_image.url if p.product_image else None}
+            for p in Products.objects.all()[:3]
+        ]
+    })

@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import index, get_product, create_order, verify_payment, paystack_webhook
+from .views import debug_cloudinary, index, get_product, create_order, verify_payment, paystack_webhook
 
 
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/create-order/', create_order, name='create-order'),
     path('api/verify-payment/', verify_payment, name='verify-payment'),
     path('api/paystack-webhook/', paystack_webhook, name='paystack-webhook'),
+    path('debug/', debug_cloudinary, name='debug'),
 ]
 
 
