@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.conf import settings
+from django.db.models import Prefetch
 from .models import Category, Products, Order, OrderItem
 import json
 import requests
@@ -11,7 +12,12 @@ import uuid
 # Create your views here.
 
 def index(request):
-    categories = Category.objects.prefetch_related('products_set').all()
+    # Only show products that are in stock (stock > 0)
+    in_stock_products = Prefetch(
+        'products_set',
+        queryset=Products.objects.filter(product_stock__gt=0)
+    )
+    categories = Category.objects.prefetch_related(in_stock_products).all()
     context = {
         'categories': categories,
         'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
