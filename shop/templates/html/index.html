@@ -27,7 +27,7 @@
                         <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                         <h4>{{ product.product_name }}</h4>
                         <p class="price">₵{{ product.product_price }}</p>
-                        <p class="stock">{{ product.product_stock }}</p>
+                        <p class="stock">{{ product.product_stock }} items left</p>
                         <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
                     {% empty %}
