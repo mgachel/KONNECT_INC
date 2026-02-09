@@ -65,76 +65,60 @@
     padding: 20px;
 }
 
-/* === Product Card with Image Overlay === */
-/* Card uses background-image to fill entire area */
+/* === Product Card - Image on top, info below === */
 .product-card {
-    position: relative;
-    height: 400px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Dark gradient overlay to make text readable */
-.product-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.1) 100%
-    );
-    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Container for text overlay at bottom */
-.product-info {
-    position: relative;
-    z-index: 2;
+/* Full-width image at top */
+.product-card img {
     width: 100%;
-    padding: 20px;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Info section below image */
+.product-info {
+    padding: 16px;
     text-align: center;
 }
 
-/* Text styling for overlay */
 .product-card h4 {
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 8px;
-    margin-top: 0;
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin: 0 0 8px 0;
     font-weight: 600;
 }
 
 .product-card .price {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #4fc3f7;
-    margin-bottom: 6px;
+    color: #0066cc;
+    margin: 0 0 6px 0;
 }
 
 .product-card .stock {
     font-size: 0.85rem;
-    color: #e0e0e0;
-    margin-bottom: 12px;
+    color: #333;
+    margin: 0 0 12px 0;
 }
 
-/* Button styled for overlay display */
+/* Button below product info */
 .add-to-cart-btn {
-    padding: 12px 28px;
-    background-color: #fff;
-    color: #001f3f;
+    padding: 12px 32px;
+    background-color: #001f3f;
+    color: #fff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -146,8 +130,7 @@
 }
 
 .add-to-cart-btn:hover {
-    background-color: #4fc3f7;
-    color: #fff;
+    background-color: #003366;
     transform: scale(1.05);
 }
 
@@ -158,19 +141,19 @@
     padding: 40px 20px;
 }
 
-/* === Responsive adjustments for overlay cards === */
+/* === Responsive adjustments === */
 @media (max-width: 768px) {
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
     
-    .product-card {
-        height: 300px;
+    .product-card img {
+        height: 220px;
     }
     
     .product-info {
-        padding: 15px;
+        padding: 12px;
     }
 }
 
@@ -179,8 +162,8 @@
         grid-template-columns: 1fr;
     }
     
-    .product-card {
-        height: 350px;
+    .product-card img {
+        height: 250px;
     }
     
     .category-tabs {

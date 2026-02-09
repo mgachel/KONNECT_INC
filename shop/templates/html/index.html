@@ -23,8 +23,8 @@
                  data-category="{{ category.id }}">
                 <div class="products-grid">
                     {% for product in category.products_set.all %}
-                    <!-- Product card with overlay design: image fills card, text overlays at bottom -->
-                    <div class="product-card" data-product-id="{{ product.id }}" style="background-image: url('{{ product.product_image.url }}');">
+                    <div class="product-card" data-product-id="{{ product.id }}">
+                        <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                         <div class="product-info">
                             <h4>{{ product.product_name }}</h4>
                             <p class="price">₵{{ product.product_price }}</p>
