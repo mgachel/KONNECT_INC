@@ -318,18 +318,19 @@
             padding: 15px;
         }
 
-        /* === PRODUCT CARD - No card, image + text only === */
+        /* === PRODUCT CARD - No white bg, subtle shadow wraps image + details === */
         .product-card {
             background: none;
             text-align: left;
             position: relative;
             overflow: visible;
-            border-radius: 0;
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             opacity: 1;
-            box-shadow: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
             display: flex;
             flex-direction: column;
+            padding: 10px;
         }
 
         .product-card::before {
@@ -338,7 +339,7 @@
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
         }
 
         .product-card:hover::before {
@@ -351,18 +352,17 @@
             object-fit: cover;
             background: none;
             transition: all 0.4s ease;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            box-shadow: none;
         }
 
         .product-card:hover img {
             transform: scale(1.02);
             filter: brightness(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .product-info {
-            padding: 14px 4px 0 4px;
+            padding: 14px 4px 4px 4px;
             background: none;
         }
 
@@ -646,16 +646,18 @@
             .product-card {
                 max-width: 100%;
                 background: none;
-                box-shadow: none;
+                padding: 8px;
             }
 
             .product-card img {
-                height: 260px;
-                border-radius: 10px;
+                height: auto;
+                max-height: 300px;
+                object-fit: contain;
+                border-radius: 8px;
             }
 
             .product-info {
-                padding: 10px 4px 0 4px;
+                padding: 10px 4px 4px 4px;
                 background: none;
             }
 
@@ -725,12 +727,14 @@
             }
 
             .product-card img {
-                height: 220px;
-                border-radius: 10px;
+                height: auto;
+                max-height: 260px;
+                object-fit: contain;
+                border-radius: 8px;
             }
 
             .product-info {
-                padding: 8px 4px 0 4px;
+                padding: 8px 4px 4px 4px;
                 background: none;
             }
 
@@ -745,7 +749,6 @@
         @media (hover: none) and (pointer: coarse) {
             .product-card:hover {
                 transform: none;
-                box-shadow: none;
             }
 
             .product-card:active {
