@@ -65,71 +65,90 @@
     padding: 20px;
 }
 
-/* === Product Card === */
+/* === Product Card with Image Overlay === */
+/* Card uses background-image to fill entire area */
 .product-card {
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-    transition: transform 0.3s ease;
-    text-align: center;
+    position: relative;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark gradient overlay to make text readable */
+.product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 1;
 }
 
 .product-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
-.product-card img {
+/* Container for text overlay at bottom */
+.product-info {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    margin-bottom: 16px;
-    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
 }
 
+/* Text styling for overlay */
 .product-card h4 {
-    font-size: 1rem;
-    color: #333;
+    font-size: 1.1rem;
+    color: #fff;
     margin-bottom: 8px;
     margin-top: 0;
-    padding: 0;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .product-card .price {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #0066cc;
-    margin-bottom: 10px;
-    padding: 0;
+    color: #4fc3f7;
+    margin-bottom: 6px;
 }
 
 .product-card .stock {
     font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 16px;
-    padding: 0;
+    color: #e0e0e0;
+    margin-bottom: 12px;
 }
 
+/* Button styled for overlay display */
 .add-to-cart-btn {
-    padding: 14px 24px;
-    background-color: #001f3f;
-    color: white;
+    padding: 12px 28px;
+    background-color: #fff;
+    color: #001f3f;
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin: 0;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .add-to-cart-btn:hover {
-    background-color: #000f2e;
+    background-color: #4fc3f7;
+    color: #fff;
+    transform: scale(1.05);
 }
 
 .no-products {
@@ -139,15 +158,19 @@
     padding: 40px 20px;
 }
 
-/* === Additional Responsive Rules === */
+/* === Responsive adjustments for overlay cards === */
 @media (max-width: 768px) {
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
     
-    .product-card img {
-        height: 160px;
+    .product-card {
+        height: 300px;
+    }
+    
+    .product-info {
+        padding: 15px;
     }
 }
 
@@ -156,8 +179,8 @@
         grid-template-columns: 1fr;
     }
     
-    .product-card img {
-        height: 200px;
+    .product-card {
+        height: 350px;
     }
     
     .category-tabs {

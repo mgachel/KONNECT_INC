@@ -23,12 +23,14 @@
                  data-category="{{ category.id }}">
                 <div class="products-grid">
                     {% for product in category.products_set.all %}
-                    <div class="product-card" data-product-id="{{ product.id }}">
-                        <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
-                        <h4>{{ product.product_name }}</h4>
-                        <p class="price">₵{{ product.product_price }}</p>
-                        <p class="stock">{{ product.product_stock }} items left</p>
-                        <button class="add-to-cart-btn">Add to Cart</button>
+                    <!-- Product card with overlay design: image fills card, text overlays at bottom -->
+                    <div class="product-card" data-product-id="{{ product.id }}" style="background-image: url('{{ product.product_image.url }}');">
+                        <div class="product-info">
+                            <h4>{{ product.product_name }}</h4>
+                            <p class="price">₵{{ product.product_price }}</p>
+                            <p class="stock">{{ product.product_stock }} items left</p>
+                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
                     </div>
                     {% empty %}
                     <p class="no-products">No products in this category yet.</p>
