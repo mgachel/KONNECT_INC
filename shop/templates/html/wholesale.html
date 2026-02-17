@@ -960,7 +960,7 @@
                             <th>Product Code</th>
                             <th>In Stock</th>
                             <th>Image</th>
-                            <th>Unit Price</th>
+                            <th>Stock Price</th>
                             <th>Order Qty</th>
                             <th></th>
                         </tr>
@@ -977,7 +977,7 @@
                                     <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                                 </div>
                             </td>
-                            <td><span class="wholesale-price">₵{{ product.product_price }}</span></td>
+                            <td><span class="wholesale-price">₵{{ product.get_wholesale_price }}</span></td>
                             <td>
                                 <div class="qty-input-group">
                                     <button type="button" onclick="adjustQty(this, -1)">−</button>
@@ -1007,7 +1007,7 @@
                             <span class="wholesale-code">Code: {{ product.product_code }}</span>
                             {% endif %}
                             <div class="price-stock">
-                                <span class="wholesale-price">₵{{ product.product_price }}</span>
+                                <span class="wholesale-price">₵{{ product.get_wholesale_price }}</span>
                                 <span class="wholesale-stock">{{ product.product_stock }} left</span>
                             </div>
                             <div class="wholesale-card-actions">

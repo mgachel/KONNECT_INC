@@ -15,12 +15,18 @@ class Category(models.Model):
 class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50)
-    product_price = models.FloatField()
+    product_price = models.FloatField(help_text='Retail price per unit')
+    wholesale_price = models.FloatField(blank=True, null=True, help_text='Wholesale/bulk price per unit (leave blank to use retail price)')
     product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
     product_image = CloudinaryField('image')
     product_description = models.TextField(blank=True, null=True)
     product_stock = models.IntegerField()
     is_new = models.BooleanField(default=False)
+
+    @property
+    def get_wholesale_price(self):
+        """Return wholesale_price if set, otherwise fall back to 200."""
+        return self.wholesale_price if self.wholesale_price is not None else 200.0
     
     
     

@@ -42,6 +42,6 @@ admin.site.register(Category)
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'product_code', 'category', 'product_price', 'product_stock', 'is_new']
+    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'product_stock', 'is_new']
     list_filter = ['category', 'is_new']
     search_fields = ['product_name', 'product_code']
