@@ -714,6 +714,170 @@
             .category-tabs { gap: 6px; }
             .category-tab { padding: 7px 12px; font-size: 0.75rem; }
         }
+
+        /* === COMPREHENSIVE RESPONSIVE === */
+
+        /* Large screens */
+        @media (min-width: 1400px) {
+            .products-container { max-width: 1300px; }
+        }
+
+        /* Tablet (768px – 1023px) */
+        @media (max-width: 1023px) and (min-width: 769px) {
+            nav { padding: 12px 4%; }
+            .logo img { height: 40px; }
+
+            .wholesale-hero { padding: 50px 5%; }
+
+            .categories { padding: 50px 4%; }
+
+            .category-tabs { gap: 8px; }
+            .category-tab { padding: 8px 16px; font-size: 0.85rem; }
+
+            .wholesale-table thead th { padding: 10px 12px; font-size: 0.75rem; }
+            .wholesale-row td { padding: 12px; }
+            .wholesale-product-info img { width: 55px; height: 55px; }
+            .wholesale-product-info h4 { font-size: 0.9rem; }
+            .wholesale-product-info .desc { font-size: 0.75rem; }
+            .wholesale-price { font-size: 0.95rem; }
+            .wholesale-stock { font-size: 0.8rem; }
+            .qty-input { width: 50px; font-size: 0.85rem; padding: 5px; }
+            .qty-input-group button { width: 28px; height: 28px; font-size: 0.95rem; }
+            .add-bulk-btn { padding: 8px 16px; font-size: 0.75rem; }
+
+            footer { padding: 35px 4%; margin-top: 50px; }
+        }
+
+        /* Small Tablet / Large Mobile (576px – 767px) */
+        @media (max-width: 767px) and (min-width: 576px) {
+            nav { padding: 12px 4%; }
+            .logo img { height: 38px; }
+            .back-link { font-size: 0.8rem; }
+
+            .wholesale-hero { padding: 45px 5%; }
+            .wholesale-badge { font-size: 0.7rem; padding: 5px 14px; }
+
+            .categories { padding: 40px 3%; }
+            .category-tabs { gap: 8px; justify-content: center; }
+            .category-tab { padding: 8px 14px; font-size: 0.8rem; }
+
+            .wholesale-card img { width: 80px; height: 80px; }
+            .wholesale-card-body h4 { font-size: 0.9rem; }
+            .wholesale-card-body .price-stock .wholesale-price { font-size: 0.95rem; }
+            .wholesale-card-actions .qty-input { width: 48px; padding: 5px; font-size: 0.85rem; }
+            .wholesale-card-actions .add-bulk-btn { padding: 8px 14px; font-size: 0.7rem; }
+
+            .cart-header h2 { font-size: 1.15rem; }
+            .cart-item-name { font-size: 0.85rem; }
+            .cart-item-price { font-size: 0.9rem; }
+            .cart-total strong { font-size: 1.2rem; }
+            .checkout-btn { font-size: 0.9rem; padding: 14px; }
+
+            footer { padding: 30px 4%; margin-top: 40px; }
+            footer p { font-size: 0.8rem; }
+        }
+
+        /* Mobile (up to 575px) */
+        @media (max-width: 575px) {
+            nav { padding: 10px 4%; }
+            .logo img { height: 32px; }
+            .back-link { font-size: 0.75rem; }
+            .nav-actions { gap: 10px; }
+
+            .wholesale-hero { padding: 40px 4%; }
+            .wholesale-hero h1 { font-size: clamp(1.2rem, 5vw, 1.5rem); }
+            .wholesale-hero p { font-size: clamp(0.8rem, 3vw, 0.95rem); }
+            .wholesale-badge { font-size: 0.65rem; padding: 4px 12px; margin-bottom: 10px; }
+
+            .categories { padding: 35px 3%; }
+            .categories h2 { font-size: 1.2rem; }
+            .categories h2::after { margin: 12px auto 25px; }
+
+            .wholesale-card { padding: 12px; gap: 10px; }
+            .wholesale-card img { width: 75px; height: 75px; border-radius: 8px; }
+            .wholesale-card-body h4 { font-size: 0.85rem; }
+            .wholesale-card-body .price-stock .wholesale-price { font-size: 0.9rem; }
+            .wholesale-card-body .price-stock .wholesale-stock { font-size: 0.7rem; }
+            .wholesale-card-actions { gap: 8px; }
+            .wholesale-card-actions .qty-input { width: 45px; padding: 4px; font-size: 0.8rem; }
+            .wholesale-card-actions .add-bulk-btn { padding: 7px 12px; font-size: 0.7rem; }
+
+            .cart-header h2 { font-size: 1.1rem; }
+            .cart-item img { width: 60px; height: 60px; }
+            .cart-item-name { font-size: 0.85rem; }
+            .cart-item-price { font-size: 0.9rem; }
+            .qty-btn { width: 25px; height: 25px; font-size: 0.9rem; }
+            .cart-total strong { font-size: 1.2rem; }
+            .checkout-btn { font-size: 0.85rem; padding: 14px; letter-spacing: 0.5px; }
+
+            .checkout-header h2 { font-size: 1.2rem; }
+            .form-group label { font-size: 0.85rem; }
+            .form-group input,
+            .form-group textarea { padding: 12px 14px; font-size: 0.9rem; }
+            .summary-item { font-size: 0.8rem; }
+            .summary-total { font-size: 1rem; }
+            .pay-btn { font-size: 0.9rem; padding: 14px; }
+
+            .success-content { padding: 35px 25px; }
+            .success-content h2 { font-size: 1.3rem; }
+            .success-content p { font-size: 0.9rem; }
+            .continue-btn { padding: 12px 30px; font-size: 0.9rem; }
+
+            footer { padding: 25px 4%; margin-top: 30px; }
+            footer p { font-size: 0.75rem; letter-spacing: 0.5px; }
+        }
+
+        /* Extra Small (up to 375px) */
+        @media (max-width: 375px) {
+            .wholesale-hero { padding: 30px 3%; }
+            .wholesale-hero h1 { font-size: 1.15rem; }
+
+            .category-tabs { flex-direction: column; align-items: center; }
+            .category-tab { width: 80%; text-align: center; }
+
+            .wholesale-card { flex-direction: column; align-items: center; text-align: center; }
+            .wholesale-card img { width: 100%; height: 180px; border-radius: 10px; }
+            .wholesale-card-body { width: 100%; }
+            .wholesale-card-body .price-stock { justify-content: center; gap: 15px; }
+            .wholesale-card-actions { justify-content: center; }
+
+            .cart-item { flex-direction: column; align-items: center; text-align: center; }
+            .cart-item img { width: 80px; height: 80px; }
+            .remove-item { top: 5px; right: 5px; }
+
+            .success-icon { width: 60px; height: 60px; }
+            .success-icon svg { width: 30px; height: 30px; }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .wholesale-row:hover { transform: none; box-shadow: 0 2px 10px var(--shadow); }
+            .wholesale-card:hover { box-shadow: 0 2px 12px var(--shadow); }
+            .option-card:hover { transform: none; }
+
+            .add-bulk-btn:active { transform: scale(0.95); }
+            .qty-input-group button:active { background: var(--wholesale); color: var(--white); }
+            .category-tab:active { transform: scale(0.95); }
+            .checkout-btn:active { transform: scale(0.98); }
+            .pay-btn:active { transform: scale(0.98); }
+            .qty-btn:active { background: var(--wholesale); color: var(--white); }
+        }
+
+        /* Landscape on short screens */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .wholesale-hero { min-height: auto; padding: 30px 5%; }
+            .categories { padding: 30px 4%; }
+            footer { padding: 20px 4%; }
+        }
+
+        /* Print */
+        @media print {
+            nav, footer, .cart-icon, .back-link, .cart-overlay, .cart-sidebar,
+            .checkout-modal, .success-modal, .add-bulk-btn, .qty-input-group button { display: none; }
+            .wholesale-hero { min-height: auto; padding: 20px; }
+            .wholesale-row { box-shadow: none; border: 1px solid #ddd; }
+            .wholesale-card { box-shadow: none; border: 1px solid #ddd; }
+        }
     </style>
 </head>
 <body>
@@ -926,8 +1090,18 @@
             add(product) {
                 const existing = this.items.find(i => i.id === product.id);
                 if (existing) {
-                    existing.quantity += product.quantity;
+                    const newQty = existing.quantity + product.quantity;
+                    if (newQty > product.stock) {
+                        this.showNotification(`Only ${product.stock} of ${product.name} in stock (${existing.quantity} already in cart)`);
+                        return;
+                    }
+                    existing.quantity = newQty;
+                    existing.stock = product.stock;
                 } else {
+                    if (product.quantity > product.stock) {
+                        this.showNotification(`Only ${product.stock} of ${product.name} in stock`);
+                        return;
+                    }
                     this.items.push({ ...product });
                 }
                 this.save();
@@ -942,9 +1116,15 @@
             updateQuantity(productId, change) {
                 const item = this.items.find(i => i.id === productId);
                 if (item) {
-                    item.quantity += change;
-                    if (item.quantity <= 0) this.remove(productId);
-                    else this.save();
+                    const newQty = item.quantity + change;
+                    if (newQty <= 0) {
+                        this.remove(productId);
+                    } else if (newQty > (item.stock || Infinity)) {
+                        this.showNotification(`Only ${item.stock} of ${item.name} in stock`);
+                    } else {
+                        item.quantity = newQty;
+                        this.save();
+                    }
                 }
             },
 
@@ -1038,8 +1218,9 @@
         function adjustQty(btn, delta) {
             const group = btn.closest('.qty-input-group') || btn.closest('.wholesale-card-actions');
             const input = group.querySelector('.qty-input');
+            const max = parseInt(input.max) || 9999;
             let val = parseInt(input.value) || 1;
-            val = Math.max(1, Math.min(val + delta, parseInt(input.max) || 9999));
+            val = Math.max(1, Math.min(val + delta, max));
             input.value = val;
         }
 
@@ -1047,17 +1228,29 @@
             const container = btn.closest('.wholesale-row') || btn.closest('.wholesale-card');
             const productId = parseInt(container.dataset.productId);
             const qtyInput = container.querySelector('.qty-input');
-            const quantity = parseInt(qtyInput.value) || 1;
+            const maxStock = parseInt(qtyInput.max) || 9999;
+            let quantity = parseInt(qtyInput.value) || 1;
+            quantity = Math.max(1, Math.min(quantity, maxStock));
 
-            // Get product info from the container
             const name = container.querySelector('h4').textContent;
             const priceText = container.querySelector('.wholesale-price').textContent;
             const price = parseFloat(priceText.replace('₵', '').replace(',', ''));
             const img = container.querySelector('img').src;
 
-            Cart.add({ id: productId, name, price, image: img, quantity });
-            qtyInput.value = 1; // reset
+            Cart.add({ id: productId, name, price, image: img, quantity, stock: maxStock });
+            qtyInput.value = 1;
         }
+
+        // Clamp qty inputs on manual typing
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('qty-input')) {
+                const input = e.target;
+                const max = parseInt(input.max) || 9999;
+                let val = parseInt(input.value);
+                if (isNaN(val) || val < 1) input.value = 1;
+                else if (val > max) input.value = max;
+            }
+        });
 
         // === DOMContentLoaded ===
         document.addEventListener('DOMContentLoaded', function() {

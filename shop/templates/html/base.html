@@ -1509,8 +1509,17 @@
             add(product) {
                 const existingItem = this.items.find(item => item.id === product.id);
                 if (existingItem) {
+                    if (existingItem.quantity + 1 > product.stock) {
+                        this.showNotification(`Only ${product.stock} of ${product.name} in stock`);
+                        return;
+                    }
                     existingItem.quantity += 1;
+                    existingItem.stock = product.stock;
                 } else {
+                    if (product.stock <= 0) {
+                        this.showNotification(`${product.name} is out of stock`);
+                        return;
+                    }
                     this.items.push({ ...product, quantity: 1 });
                 }
                 this.save();
@@ -1525,10 +1534,13 @@
             updateQuantity(productId, change) {
                 const item = this.items.find(item => item.id === productId);
                 if (item) {
-                    item.quantity += change;
-                    if (item.quantity <= 0) {
+                    const newQty = item.quantity + change;
+                    if (newQty <= 0) {
                         this.remove(productId);
+                    } else if (newQty > (item.stock || Infinity)) {
+                        this.showNotification(`Only ${item.stock} of ${item.name} in stock`);
                     } else {
+                        item.quantity = newQty;
                         this.save();
                     }
                 }
@@ -1871,11 +1883,14 @@
             document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const card = this.closest('.product-card');
+                    const stockText = card.querySelector('.stock').textContent;
+                    const stock = parseInt(stockText) || 0;
                     const product = {
                         id: parseInt(card.dataset.productId),
                         name: card.querySelector('h4').textContent,
                         price: parseFloat(card.querySelector('.price').textContent.replace('₵', '')),
-                        image: card.querySelector('img').src
+                        image: card.querySelector('img').src,
+                        stock: stock
                     };
                     Cart.add(product);
                 });
