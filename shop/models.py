@@ -16,7 +16,7 @@ class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50)
     product_price = models.FloatField()
-    # product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
     product_image = CloudinaryField('image')
     product_description = models.TextField(blank=True, null=True)
     product_stock = models.IntegerField()
