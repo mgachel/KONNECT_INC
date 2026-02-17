@@ -1,0 +1,344 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KONNECT INC – Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002147;
+            --secondary: #003366;
+            --accent: #0056b3;
+            --accent-hover: #0077cc;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --shadow: rgba(0, 33, 71, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* === NAVBAR === */
+        nav {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* === HERO === */
+        .landing-hero {
+            background: url('/static/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 80px 5% 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .landing-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(10%,10%) scale(1.1); }
+        }
+
+        .landing-hero h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .landing-hero p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === OPTION CARDS === */
+        .options-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 5%;
+            background: var(--light);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .option-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px 35px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 2px solid transparent;
+        }
+
+        .option-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 33, 71, 0.15);
+            border-color: var(--accent);
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .option-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: transform 0.4s ease;
+        }
+
+        .option-card:hover .option-icon {
+            transform: scale(1.1);
+        }
+
+        .option-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: var(--white);
+        }
+
+        .option-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .option-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .option-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover .option-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.3);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 30px 5%;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 700px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                max-width: 420px;
+            }
+
+            .option-card {
+                padding: 40px 25px;
+            }
+
+            .landing-hero {
+                padding: 60px 5% 40px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .option-card h2 {
+                font-size: 1.3rem;
+            }
+
+            .option-card p {
+                font-size: 0.85rem;
+            }
+
+            .option-icon {
+                width: 65px;
+                height: 65px;
+            }
+
+            .option-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        /* Touch Device */
+        @media (hover: none) and (pointer: coarse) {
+            .option-card:hover {
+                transform: none;
+            }
+
+            .option-card:active {
+                transform: scale(0.98);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="KONNECT INC logo">
+        </a>
+    </nav>
+
+    <section class="landing-hero">
+        <h1>Welcome to KONNECT INC</h1>
+        <p>Choose how you'd like to shop with us today.</p>
+    </section>
+
+    <section class="options-section">
+        <div class="options-grid">
+
+            <!-- RETAIL OPTION -->
+            <a href="{% url 'shop-retail' %}" class="option-card">
+                <div class="option-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <h2>Retail</h2>
+                <p>Browse our catalogue and purchase individual items at retail prices.</p>
+                <span class="option-btn">Shop Retail</span>
+            </a>
+
+            <!-- WHOLESALE OPTION -->
+            <a href="{% url 'shop-wholesale' %}" class="option-card">
+                <div class="option-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-.9-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/>
+                    </svg>
+                </div>
+                <h2>Wholesale</h2>
+                <p>Buy in bulk at wholesale prices. Perfect for businesses and resellers.</p>
+                <span class="option-btn">Shop Wholesale</span>
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 KONNECT INC. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

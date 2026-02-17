@@ -11,7 +11,13 @@ import uuid
 
 # Create your views here.
 
+def landing(request):
+    """Landing page – lets users choose retail or wholesale."""
+    return render(request, 'html/landing.html')
+
+
 def index(request):
+    """Retail shop page."""
     # Only show products that are in stock (stock > 0)
     in_stock_products = Prefetch(
         'products_set',
@@ -23,6 +29,20 @@ def index(request):
         'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
     }
     return render(request, 'html/index.html', context)
+
+
+def wholesale(request):
+    """Wholesale page – bulk purchasing."""
+    in_stock_products = Prefetch(
+        'products_set',
+        queryset=Products.objects.filter(product_stock__gt=0)
+    )
+    categories = Category.objects.prefetch_related(in_stock_products).all()
+    context = {
+        'categories': categories,
+        'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
+    }
+    return render(request, 'html/wholesale.html', context)
 
 
 def get_product(request, product_id):
