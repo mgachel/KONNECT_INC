@@ -19,7 +19,6 @@ class Products(models.Model):
     wholesale_price = models.FloatField(blank=True, null=True, help_text='Wholesale/bulk price per unit (leave blank to use retail price)')
     product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
     product_image = CloudinaryField('image')
-    product_description = models.TextField(blank=True, null=True)
     product_stock = models.IntegerField()
     is_new = models.BooleanField(default=False)
 

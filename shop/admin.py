@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Category, Products, Order, OrderItem
 
 
@@ -42,6 +43,44 @@ admin.site.register(Category)
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'product_stock', 'is_new']
+    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'product_stock', 'is_new', 'image_thumbnail']
     list_filter = ['category', 'is_new']
     search_fields = ['product_name', 'product_code']
+    readonly_fields = ['image_preview']
+
+    fieldsets = (
+        ('Product Info', {
+            'fields': ('category', 'product_name', 'product_code', 'is_new')
+        }),
+        ('Pricing & Stock', {
+            'fields': ('product_price', 'wholesale_price', 'product_stock')
+        }),
+        ('Image', {
+            'fields': ('product_image', 'image_preview'),
+        }),
+    )
+
+    def image_preview(self, obj):
+        """Large preview shown on the edit form."""
+        if obj.product_image:
+            url = obj.product_image.url
+            return format_html(
+                '<img src="{}" style="max-height:300px;max-width:100%;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.15)" />',
+                url
+            )
+        return 'No image uploaded yet'
+    image_preview.short_description = 'Image Preview'
+
+    def image_thumbnail(self, obj):
+        """Small thumbnail shown in the list view."""
+        if obj.product_image:
+            url = obj.product_image.url
+            return format_html(
+                '<img src="{}" style="height:40px;width:40px;object-fit:cover;border-radius:4px" />',
+                url
+            )
+        return '-'
+    image_thumbnail.short_description = 'Image'
+
+    class Media:
+        js = ('admin/js/image_preview.js',)
