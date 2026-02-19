@@ -478,6 +478,27 @@
                 font-size: 0.75rem;
             }
 
+            .wholesale-card-body .box-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: rgba(0, 33, 71, 0.06);
+                padding: 4px 8px;
+                border-radius: 6px;
+            }
+
+            .wholesale-card-body .box-info .wholesale-qty-per-box {
+                font-size: 0.8rem;
+                color: var(--wholesale);
+                font-weight: 600;
+            }
+
+            .wholesale-card-body .box-info .wholesale-box-price {
+                font-size: 0.85rem;
+                color: var(--wholesale);
+                font-weight: 700;
+            }
+
             .wholesale-card-actions {
                 display: flex;
                 align-items: center;
@@ -960,14 +981,18 @@
                             <th>Product Code</th>
                             <th>In Stock</th>
                             <th>Image</th>
-                            <th>Stock Price</th>
-                            <th>Order Qty</th>
+                            <th>Unit Price</th>
+                            <th>Qty/Box</th>
+                            <th>Box Price</th>
+                            <th>Order Qty (Boxes)</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for product in category.products_set.all %}
-                        <tr class="wholesale-row" data-product-id="{{ product.id }}">
+                        <tr class="wholesale-row" data-product-id="{{ product.id }}"
+                            data-qty-per-box="{{ product.quantity_per_box }}"
+                            data-unit-price="{{ product.get_wholesale_price }}">
                             <td><span class="serial-num">{{ forloop.counter }}</span></td>
                             <td><span class="wholesale-product-name">{{ product.product_name }}</span></td>
                             <td><span class="wholesale-code">{{ product.product_code|default:"—" }}</span></td>
@@ -978,6 +1003,8 @@
                                 </div>
                             </td>
                             <td><span class="wholesale-price">₵{{ product.get_wholesale_price }}</span></td>
+                            <td><span class="wholesale-qty-per-box">{{ product.quantity_per_box }}</span></td>
+                            <td><span class="wholesale-box-price">₵{{ product.box_price }}</span></td>
                             <td>
                                 <div class="qty-input-group">
                                     <button type="button" onclick="adjustQty(this, -1)">−</button>
@@ -990,7 +1017,7 @@
                             </td>
                         </tr>
                         {% empty %}
-                        <tr><td colspan="8"><p class="no-products">No products in this category yet.</p></td></tr>
+                        <tr><td colspan="10"><p class="no-products">No products in this category yet.</p></td></tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -998,7 +1025,9 @@
                 <!-- Mobile Cards -->
                 <div class="wholesale-cards">
                     {% for product in category.products_set.all %}
-                    <div class="wholesale-card" data-product-id="{{ product.id }}">
+                    <div class="wholesale-card" data-product-id="{{ product.id }}"
+                         data-qty-per-box="{{ product.quantity_per_box }}"
+                         data-unit-price="{{ product.get_wholesale_price }}">
                         <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                         <div class="wholesale-card-body">
                             <span class="wholesale-card-sn">#{{ forloop.counter }}</span>
@@ -1007,11 +1036,15 @@
                             <span class="wholesale-code">Code: {{ product.product_code }}</span>
                             {% endif %}
                             <div class="price-stock">
-                                <span class="wholesale-price">₵{{ product.get_wholesale_price }}</span>
+                                <span class="wholesale-price">₵{{ product.get_wholesale_price }}/unit</span>
                                 <span class="wholesale-stock">{{ product.product_stock }} left</span>
                             </div>
+                            <div class="box-info">
+                                <span class="wholesale-qty-per-box">{{ product.quantity_per_box }} units/box</span>
+                                <span class="wholesale-box-price">₵{{ product.box_price }}/box</span>
+                            </div>
                             <div class="wholesale-card-actions">
-                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}">
+                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}" placeholder="Boxes">
                                 <button class="add-bulk-btn" onclick="addBulkToCart(this)">Add to Cart</button>
                             </div>
                         </div>
@@ -1138,7 +1171,7 @@
                     this.items.push({ ...product });
                 }
                 this.save();
-                this.showNotification(`${product.quantity}× ${product.name} added to cart!`);
+                this.showNotification(`${product.quantity} box${product.quantity > 1 ? 'es' : ''} of ${product.name} added to cart!`);
             },
 
             remove(productId) {
@@ -1162,7 +1195,7 @@
             },
 
             getTotal() {
-                return this.items.reduce((s, i) => s + (i.price * i.quantity), 0);
+                return this.items.reduce((s, i) => s + (i.price * (i.qtyPerBox || 1) * i.quantity), 0);
             },
 
             getCount() {
@@ -1199,10 +1232,13 @@
                             <img src="${item.image}" alt="${item.name}">
                             <div class="cart-item-details">
                                 <div class="cart-item-name">${item.name}</div>
-                                <div class="cart-item-price">₵${(item.price * item.quantity).toFixed(2)}</div>
+                                <div class="cart-item-box-info" style="font-size:0.75rem;color:#666;">
+                                    ₵${item.price.toFixed(2)} × ${item.qtyPerBox || 1} units/box × ${item.quantity} box${item.quantity > 1 ? 'es' : ''}
+                                </div>
+                                <div class="cart-item-price">₵${(item.price * (item.qtyPerBox || 1) * item.quantity).toFixed(2)}</div>
                                 <div class="cart-item-quantity">
                                     <button class="qty-btn" onclick="Cart.updateQuantity(${item.id}, -1)">−</button>
-                                    <span class="qty-value">${item.quantity}</span>
+                                    <span class="qty-value">${item.quantity} box${item.quantity > 1 ? 'es' : ''}</span>
                                     <button class="qty-btn" onclick="Cart.updateQuantity(${item.id}, 1)">+</button>
                                 </div>
                             </div>
@@ -1260,6 +1296,8 @@
         function addBulkToCart(btn) {
             const container = btn.closest('.wholesale-row') || btn.closest('.wholesale-card');
             const productId = parseInt(container.dataset.productId);
+            const qtyPerBox = parseInt(container.dataset.qtyPerBox) || 1;
+            const unitPrice = parseFloat(container.dataset.unitPrice) || 0;
             const qtyInput = container.querySelector('.qty-input');
             const maxStock = parseInt(qtyInput.max) || 9999;
             let quantity = parseInt(qtyInput.value) || 1;
@@ -1268,12 +1306,11 @@
             // Product name: .wholesale-product-name on desktop table, h4 on mobile card
             const nameEl = container.querySelector('.wholesale-product-name') || container.querySelector('h4');
             const name = nameEl ? nameEl.textContent.trim() : 'Product';
-            const priceText = container.querySelector('.wholesale-price').textContent;
-            const price = parseFloat(priceText.replace('₵', '').replace(',', ''));
+            const boxPrice = unitPrice * qtyPerBox;
             // Image might be nested inside .wholesale-product-info on desktop
             const img = container.querySelector('img').src;
 
-            Cart.add({ id: productId, name, price, image: img, quantity, stock: maxStock });
+            Cart.add({ id: productId, name, price: unitPrice, boxPrice, qtyPerBox, image: img, quantity, stock: maxStock });
             qtyInput.value = 1;
         }
 
@@ -1345,8 +1382,8 @@
 
                 summaryItems.innerHTML = Cart.items.map(item => `
                     <div class="summary-item">
-                        <span>${item.name} × ${item.quantity}</span>
-                        <span>₵${(item.price * item.quantity).toFixed(2)}</span>
+                        <span>${item.name} × ${item.quantity} box${item.quantity > 1 ? 'es' : ''} (${item.qtyPerBox || 1}/box)</span>
+                        <span>₵${(item.price * (item.qtyPerBox || 1) * item.quantity).toFixed(2)}</span>
                     </div>
                 `).join('');
 

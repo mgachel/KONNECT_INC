@@ -16,7 +16,8 @@ class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50)
     product_price = models.FloatField(help_text='Retail price per unit')
-    wholesale_price = models.FloatField(blank=True, null=True, help_text='Wholesale/bulk price per unit (leave blank to use retail price)')
+    wholesale_price = models.FloatField(blank=True, null=True, help_text='Wholesale unit price per item in a box (leave blank to default to ₵200)')
+    quantity_per_box = models.PositiveIntegerField(default=1, help_text='Number of units per box for wholesale')
     product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
     product_image = CloudinaryField('image')
     product_stock = models.IntegerField()
@@ -24,8 +25,13 @@ class Products(models.Model):
 
     @property
     def get_wholesale_price(self):
-        """Return wholesale_price if set, otherwise fall back to 200."""
+        """Return wholesale unit price if set, otherwise fall back to 200."""
         return self.wholesale_price if self.wholesale_price is not None else 200.0
+
+    @property
+    def box_price(self):
+        """Price for one full box = unit price × quantity per box."""
+        return self.get_wholesale_price * self.quantity_per_box
     
     
     

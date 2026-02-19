@@ -43,22 +43,11 @@ admin.site.register(Category)
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'product_stock', 'is_new', 'image_thumbnail']
+    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'is_new', 'image_thumbnail']
     list_filter = ['category', 'is_new']
     search_fields = ['product_name', 'product_code']
     readonly_fields = ['image_preview']
-
-    fieldsets = (
-        ('Product Info', {
-            'fields': ('category', 'product_name', 'product_code', 'is_new')
-        }),
-        ('Pricing & Stock', {
-            'fields': ('product_price', 'wholesale_price', 'product_stock')
-        }),
-        ('Image', {
-            'fields': ('product_image', 'image_preview'),
-        }),
-    )
+    fields = ('category', 'product_name', 'product_code', 'is_new', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'product_image', 'image_preview')
 
     def image_preview(self, obj):
         """Large preview shown on the edit form."""
