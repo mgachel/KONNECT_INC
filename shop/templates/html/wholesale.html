@@ -417,15 +417,13 @@
 
         @media (max-width: 768px) {
             .wholesale-table { display: none; }
-            .wholesale-cards { display: flex; flex-direction: column; gap: 16px; }
+            .wholesale-cards { display: flex; flex-direction: column; gap: 18px; }
 
             .wholesale-card {
                 background: var(--white);
-                border-radius: 14px;
-                box-shadow: 0 2px 12px var(--shadow);
-                padding: 16px;
-                display: flex;
-                gap: 14px;
+                border-radius: 16px;
+                box-shadow: 0 2px 14px var(--shadow);
+                overflow: hidden;
                 transition: box-shadow 0.3s ease;
             }
 
@@ -433,24 +431,27 @@
                 box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             }
 
+            /* -- Card top: image + product name side by side -- */
+            .wholesale-card-top {
+                display: flex;
+                gap: 14px;
+                padding: 16px 16px 12px;
+                align-items: center;
+            }
+
             .wholesale-card img {
-                width: 110px; height: 110px;
+                width: 100px; height: 100px;
                 object-fit: contain;
                 border-radius: 10px;
                 flex-shrink: 0;
                 background: #f5f5f5;
             }
 
-            .wholesale-card-body {
+            .wholesale-card-header {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                gap: 6px;
-            }
-
-            .wholesale-card-body h4 {
-                font-size: 0.95rem;
-                font-weight: 600;
+                gap: 4px;
             }
 
             .wholesale-card-sn {
@@ -461,55 +462,112 @@
                 letter-spacing: 0.5px;
             }
 
-            .wholesale-card-body .wholesale-code {
+            .wholesale-card-header h4 {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--text);
+                margin: 0;
+                line-height: 1.3;
+            }
+
+            .wholesale-card-header .wholesale-code {
                 font-size: 0.75rem;
                 color: var(--gray);
             }
 
-            .wholesale-card-body .price-stock {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .wholesale-card-body .price-stock .wholesale-price {
-                font-size: 1rem;
-            }
-
-            .wholesale-card-body .price-stock .wholesale-stock {
-                font-size: 0.75rem;
-            }
-
-            .wholesale-card-body .box-info {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background: rgba(0, 33, 71, 0.06);
-                padding: 4px 8px;
-                border-radius: 6px;
-            }
-
-            .wholesale-card-body .box-info .wholesale-qty-per-box {
-                font-size: 0.8rem;
-                color: var(--wholesale);
+            .wholesale-card-header .wholesale-stock-badge {
+                display: inline-block;
+                margin-top: 2px;
+                font-size: 0.72rem;
                 font-weight: 600;
+                color: #2e7d32;
+                background: rgba(46, 125, 50, 0.1);
+                padding: 2px 10px;
+                border-radius: 20px;
+                width: fit-content;
             }
 
-            .wholesale-card-body .box-info .wholesale-box-price {
-                font-size: 0.85rem;
-                color: var(--wholesale);
+            /* -- Details grid: labeled rows -- */
+            .wholesale-card-details {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                margin: 0 16px;
+                border-top: 1px solid var(--gray-light);
+                border-bottom: 1px solid var(--gray-light);
+            }
+
+            .wholesale-detail-item {
+                padding: 10px 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .wholesale-detail-item:nth-child(odd) {
+                border-right: 1px solid var(--gray-light);
+            }
+
+            .wholesale-detail-item:nth-child(1),
+            .wholesale-detail-item:nth-child(2) {
+                border-bottom: 1px solid var(--gray-light);
+            }
+
+            .wholesale-detail-label {
+                font-size: 0.65rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                color: var(--text-light);
+            }
+
+            .wholesale-detail-value {
+                font-size: 0.95rem;
                 font-weight: 700;
+                color: var(--text);
             }
 
+            .wholesale-detail-value.price-highlight {
+                color: var(--wholesale);
+            }
+
+            /* -- Card bottom: quantity + add to cart -- */
             .wholesale-card-actions {
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                margin-top: 4px;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 14px 16px;
             }
 
-            .wholesale-card-actions .qty-input { width: 50px; padding: 5px; }
-            .wholesale-card-actions .add-bulk-btn { padding: 8px 16px; font-size: 0.75rem; }
+            .wholesale-card-actions .qty-section {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .wholesale-card-actions .qty-label {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: var(--text-light);
+                white-space: nowrap;
+            }
+
+            .wholesale-card-actions .qty-input {
+                width: 55px;
+                padding: 8px 4px;
+                font-size: 0.9rem;
+                text-align: center;
+                border: 2px solid var(--gray-light);
+                border-radius: 8px;
+                font-weight: 600;
+            }
+
+            .wholesale-card-actions .add-bulk-btn {
+                padding: 10px 18px;
+                font-size: 0.78rem;
+                flex-shrink: 0;
+            }
         }
 
         /* === CART SIDEBAR (same as retail) === */
@@ -813,11 +871,11 @@
             .category-tabs { gap: 8px; justify-content: center; }
             .category-tab { padding: 8px 14px; font-size: 0.8rem; }
 
-            .wholesale-card img { width: 100px; height: 100px; object-fit: contain; background: #f5f5f5; }
-            .wholesale-card-body h4 { font-size: 0.9rem; }
-            .wholesale-card-body .price-stock .wholesale-price { font-size: 0.95rem; }
-            .wholesale-card-actions .qty-input { width: 48px; padding: 5px; font-size: 0.85rem; }
-            .wholesale-card-actions .add-bulk-btn { padding: 8px 14px; font-size: 0.7rem; }
+            .wholesale-card img { width: 90px; height: 90px; }
+            .wholesale-card-header h4 { font-size: 0.9rem; }
+            .wholesale-detail-value { font-size: 0.9rem; }
+            .wholesale-card-actions .qty-input { width: 50px; padding: 6px; font-size: 0.85rem; }
+            .wholesale-card-actions .add-bulk-btn { padding: 9px 16px; font-size: 0.75rem; }
 
             .cart-header h2 { font-size: 1.15rem; }
             .cart-item-name { font-size: 0.85rem; }
@@ -845,14 +903,17 @@
             .categories h2 { font-size: 1.2rem; }
             .categories h2::after { margin: 12px auto 25px; }
 
-            .wholesale-card { padding: 12px; gap: 10px; }
-            .wholesale-card img { width: 95px; height: 95px; border-radius: 8px; object-fit: contain; background: #f5f5f5; }
-            .wholesale-card-body h4 { font-size: 0.85rem; }
-            .wholesale-card-body .price-stock .wholesale-price { font-size: 0.9rem; }
-            .wholesale-card-body .price-stock .wholesale-stock { font-size: 0.7rem; }
-            .wholesale-card-actions { gap: 8px; }
-            .wholesale-card-actions .qty-input { width: 45px; padding: 4px; font-size: 0.8rem; }
-            .wholesale-card-actions .add-bulk-btn { padding: 7px 12px; font-size: 0.7rem; }
+            .wholesale-card-top { padding: 14px 14px 10px; gap: 12px; }
+            .wholesale-card img { width: 85px; height: 85px; border-radius: 8px; }
+            .wholesale-card-header h4 { font-size: 0.88rem; }
+            .wholesale-card-details { margin: 0 14px; }
+            .wholesale-detail-item { padding: 8px 6px; }
+            .wholesale-detail-label { font-size: 0.6rem; }
+            .wholesale-detail-value { font-size: 0.88rem; }
+            .wholesale-card-actions { padding: 12px 14px; gap: 10px; }
+            .wholesale-card-actions .qty-label { font-size: 0.7rem; }
+            .wholesale-card-actions .qty-input { width: 50px; padding: 6px 4px; font-size: 0.85rem; }
+            .wholesale-card-actions .add-bulk-btn { padding: 9px 14px; font-size: 0.72rem; }
 
             .cart-header h2 { font-size: 1.1rem; }
             .cart-item img { width: 60px; height: 60px; }
@@ -887,11 +948,50 @@
             .category-tabs { flex-direction: column; align-items: center; }
             .category-tab { width: 80%; text-align: center; }
 
-            .wholesale-card { flex-direction: column; align-items: center; text-align: center; }
-            .wholesale-card img { width: 100%; height: 200px; border-radius: 10px; object-fit: contain; background: #f5f5f5; }
-            .wholesale-card-body { width: 100%; }
-            .wholesale-card-body .price-stock { justify-content: center; gap: 15px; }
-            .wholesale-card-actions { justify-content: center; }
+            /* Stack image above info on very small screens */
+            .wholesale-card-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .wholesale-card img {
+                width: 100%;
+                height: 180px;
+                border-radius: 10px;
+            }
+
+            .wholesale-card-header {
+                align-items: center;
+            }
+
+            .wholesale-card-details {
+                margin: 0 12px;
+            }
+
+            .wholesale-detail-item {
+                padding: 8px 4px;
+            }
+
+            .wholesale-detail-label { font-size: 0.58rem; }
+            .wholesale-detail-value { font-size: 0.85rem; }
+
+            .wholesale-card-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .wholesale-card-actions .qty-section {
+                justify-content: center;
+            }
+
+            .wholesale-card-actions .add-bulk-btn {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
 
             .cart-item { flex-direction: column; align-items: center; text-align: center; }
             .cart-item img { width: 80px; height: 80px; }
@@ -1030,26 +1130,49 @@
                     <div class="wholesale-card" data-product-id="{{ product.id }}"
                          data-qty-per-box="{{ product.quantity_per_box }}"
                          data-unit-price="{{ product.get_wholesale_price }}">
-                        <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
-                        <div class="wholesale-card-body">
-                            <span class="wholesale-card-sn">#{{ forloop.counter }}</span>
-                            <h4>{{ product.product_name }}</h4>
-                            {% if product.product_code %}
-                            <span class="wholesale-code">Code: {{ product.product_code }}</span>
-                            {% endif %}
-                            <div class="price-stock">
-                                <span class="wholesale-price">₵{{ product.get_wholesale_price }}/unit</span>
-                                <span class="wholesale-stock">{{ product.product_stock }} left</span>
-                            </div>
-                            <div class="box-info">
-                                <span class="wholesale-qty-per-box">{{ product.quantity_per_box }} units/box</span>
-                                <span class="wholesale-box-price">₵{{ product.box_price }}/box</span>
-                            </div>
-                            <div class="wholesale-card-actions">
-                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}" placeholder="Boxes">
-                                <button class="add-bulk-btn" onclick="addBulkToCart(this)">Add to Cart</button>
+
+                        <!-- Top: Image + Name/Code/Stock -->
+                        <div class="wholesale-card-top">
+                            <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                            <div class="wholesale-card-header">
+                                <span class="wholesale-card-sn">#{{ forloop.counter }}</span>
+                                <h4>{{ product.product_name }}</h4>
+                                {% if product.product_code %}
+                                <span class="wholesale-code">Code: {{ product.product_code }}</span>
+                                {% endif %}
+                                <span class="wholesale-stock-badge">{{ product.product_stock }} in stock</span>
                             </div>
                         </div>
+
+                        <!-- Middle: Labeled detail grid -->
+                        <div class="wholesale-card-details">
+                            <div class="wholesale-detail-item">
+                                <span class="wholesale-detail-label">Unit Price</span>
+                                <span class="wholesale-detail-value price-highlight">₵{{ product.get_wholesale_price }}</span>
+                            </div>
+                            <div class="wholesale-detail-item">
+                                <span class="wholesale-detail-label">Units Per Box</span>
+                                <span class="wholesale-detail-value">{{ product.quantity_per_box }}</span>
+                            </div>
+                            <div class="wholesale-detail-item">
+                                <span class="wholesale-detail-label">Box Price</span>
+                                <span class="wholesale-detail-value price-highlight">₵{{ product.box_price }}</span>
+                            </div>
+                            <div class="wholesale-detail-item">
+                                <span class="wholesale-detail-label">Min. Order</span>
+                                <span class="wholesale-detail-value">1 Box</span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom: Quantity + Add to Cart -->
+                        <div class="wholesale-card-actions">
+                            <div class="qty-section">
+                                <span class="qty-label">Boxes:</span>
+                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}">
+                            </div>
+                            <button class="add-bulk-btn" onclick="addBulkToCart(this)">Add to Cart</button>
+                        </div>
+
                     </div>
                     {% empty %}
                     <p class="no-products">No products in this category yet.</p>
@@ -1306,7 +1429,7 @@
             quantity = Math.max(1, Math.min(quantity, maxStock));
 
             // Product name: .wholesale-product-name on desktop table, h4 on mobile card
-            const nameEl = container.querySelector('.wholesale-product-name') || container.querySelector('h4');
+            const nameEl = container.querySelector('.wholesale-product-name') || container.querySelector('.wholesale-card-header h4') || container.querySelector('h4');
             const name = nameEl ? nameEl.textContent.trim() : 'Product';
             const boxPrice = unitPrice * qtyPerBox;
             // Image might be nested inside .wholesale-product-info on desktop
