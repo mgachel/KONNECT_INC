@@ -43,11 +43,11 @@ admin.site.register(Category)
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'is_new', 'image_thumbnail']
+    list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'is_new', 'image_thumbnail', 'has_video']
     list_filter = ['category', 'is_new']
     search_fields = ['product_name', 'product_code']
-    readonly_fields = ['image_preview']
-    fields = ('category', 'product_name', 'product_code', 'is_new', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'product_image', 'image_preview')
+    readonly_fields = ['image_preview', 'video_preview']
+    fields = ('category', 'product_name', 'product_code', 'is_new', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'product_image', 'image_preview', 'product_video', 'video_preview')
 
     def image_preview(self, obj):
         """Large preview shown on the edit form."""
@@ -60,6 +60,17 @@ class ProductsAdmin(admin.ModelAdmin):
         return 'No image uploaded yet'
     image_preview.short_description = 'Image Preview'
 
+    def video_preview(self, obj):
+        """Video preview shown on the edit form."""
+        if obj.product_video:
+            url = obj.product_video.url
+            return format_html(
+                '<video src="{}" controls style="max-height:300px;max-width:100%;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.15)"></video>',
+                url
+            )
+        return 'No video uploaded yet'
+    video_preview.short_description = 'Video Preview'
+
     def image_thumbnail(self, obj):
         """Small thumbnail shown in the list view."""
         if obj.product_image:
@@ -70,6 +81,12 @@ class ProductsAdmin(admin.ModelAdmin):
             )
         return '-'
     image_thumbnail.short_description = 'Image'
+
+    def has_video(self, obj):
+        """Show whether product has a video."""
+        return bool(obj.product_video)
+    has_video.boolean = True
+    has_video.short_description = 'Video'
 
     class Media:
         js = ('admin/js/image_preview.js',)

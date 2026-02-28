@@ -20,6 +20,7 @@ class Products(models.Model):
     quantity_per_box = models.PositiveIntegerField(default=1, help_text='Number of units per box for wholesale')
     product_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
     product_image = CloudinaryField('image')
+    product_video = CloudinaryField('video', resource_type='video', blank=True, null=True, help_text='Optional short product video')
     product_stock = models.IntegerField()
     is_new = models.BooleanField(default=False)
 
@@ -75,5 +76,4 @@ class OrderItem(models.Model):
     def subtotal(self):
         return self.quantity * self.price
 
-
-
+ 
