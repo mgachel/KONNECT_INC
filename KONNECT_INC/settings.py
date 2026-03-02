@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-0qa@d!-i(*f_(7@#doqtj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 
 # Add Render host
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -177,6 +177,7 @@ PAYSTACK_PUBLIC_KEY = os.environ.get('PAYSTACK_PUBLIC_KEY', 'pk_test_3c4130cf2ff
 
 # Security settings for production
 if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True

@@ -11,6 +11,11 @@ import uuid
 
 # Create your views here.
 
+def health_check(request):
+    """Lightweight health check to keep Render from spinning down."""
+    return JsonResponse({'status': 'ok'})
+
+
 def landing(request):
     """Landing page – lets users choose retail or wholesale."""
     return render(request, 'html/landing.html')

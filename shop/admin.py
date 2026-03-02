@@ -56,6 +56,7 @@ admin.site.register(Category)
 class ProductsAdmin(admin.ModelAdmin):
     list_display = ['product_name', 'product_code', 'category', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'wholesale_stock', 'is_new', 'image_thumbnail', 'has_video']
     list_filter = ['category', 'is_new']
+    list_select_related = ['category']
     search_fields = ['product_name', 'product_code']
     readonly_fields = ['image_preview', 'video_preview']
     fields = ('category', 'product_name', 'product_code', 'is_new', 'product_price', 'wholesale_price', 'quantity_per_box', 'product_stock', 'wholesale_stock', 'product_image', 'image_preview', 'product_video', 'video_preview')

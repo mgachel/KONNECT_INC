@@ -1,10 +1,11 @@
 from django.urls import path 
-from .views import debug_cloudinary, landing, index, wholesale, get_product, create_order, verify_payment, paystack_webhook
+from .views import debug_cloudinary, health_check, landing, index, wholesale, get_product, create_order, verify_payment, paystack_webhook
 
 
 
 urlpatterns = [
     path('', landing, name='shop-landing'),
+    path('health/', health_check, name='health-check'),
     path('retail/', index, name='shop-retail'),
     path('wholesale/', wholesale, name='shop-wholesale'),
     path('api/product/<int:product_id>/', get_product, name='get-product'),
