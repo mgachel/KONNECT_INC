@@ -10,7 +10,7 @@ services:
     runtime: python
     plan: free
     buildCommand: "./build.sh"
-    startCommand: "gunicorn KONNECT_INC.wsgi:application --workers 2 --timeout 120 --threads 2"
+    startCommand: "gunicorn KONNECT_INC.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:

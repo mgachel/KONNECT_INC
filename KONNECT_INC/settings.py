@@ -148,12 +148,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'shop', 'static'),
-]
+
+# Do NOT add shop/static here – Django's AppDirectoriesFinder already
+# discovers it automatically.  Listing it twice causes "Found another file
+# with the destination path" warnings and slows collectstatic.
+# STATICFILES_DIRS = []
 
 # WhiteNoise for serving static files in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# CompressedStaticFilesStorage works like CompressedManifestStaticFilesStorage
+# but won't break when a referenced file is missing from the manifest.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Use Cloudinary for media files
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
