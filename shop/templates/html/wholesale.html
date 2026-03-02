@@ -1174,7 +1174,7 @@
                             <td><span class="serial-num">{{ forloop.counter }}</span></td>
                             <td><span class="wholesale-product-name">{{ product.product_name }}</span></td>
                             <td><span class="wholesale-code">{{ product.product_code|default:"—" }}</span></td>
-                            <td><span class="wholesale-stock">{{ product.product_stock }} units</span></td>
+                            <td><span class="wholesale-stock">{{ product.wholesale_stock }} boxes</span></td>
                             <td>
                                 <div class="wholesale-product-info">
                                     <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
@@ -1189,7 +1189,7 @@
                             <td>
                                 <div class="qty-input-group">
                                     <button type="button" onclick="adjustQty(this, -1)">−</button>
-                                    <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}">
+                                    <input type="number" class="qty-input" value="1" min="1" max="{{ product.wholesale_stock }}">
                                     <button type="button" onclick="adjustQty(this, 1)">+</button>
                                 </div>
                             </td>
@@ -1230,7 +1230,7 @@
                                 {% if product.product_code %}
                                 <span class="wholesale-code">Code: {{ product.product_code }}</span>
                                 {% endif %}
-                                <span class="wholesale-stock-badge">{{ product.product_stock }} in stock</span>
+                                <span class="wholesale-stock-badge">{{ product.wholesale_stock }} boxes in stock</span>
                             </div>
                         </div>
 
@@ -1258,7 +1258,7 @@
                         <div class="wholesale-card-actions">
                             <div class="qty-section">
                                 <span class="qty-label">Boxes:</span>
-                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.product_stock }}">
+                                <input type="number" class="qty-input" value="1" min="1" max="{{ product.wholesale_stock }}">
                             </div>
                             <button class="add-bulk-btn" onclick="addBulkToCart(this)">Add to Cart</button>
                         </div>

@@ -35,7 +35,7 @@ def wholesale(request):
     """Wholesale page – bulk purchasing."""
     in_stock_products = Prefetch(
         'products_set',
-        queryset=Products.objects.filter(product_stock__gt=0)
+        queryset=Products.objects.filter(wholesale_stock__gt=0)
     )
     categories = Category.objects.prefetch_related(in_stock_products).all()
     context = {

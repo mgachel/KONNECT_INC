@@ -22,6 +22,7 @@ class Products(models.Model):
     product_image = CloudinaryField('image')
     product_video = CloudinaryField('video', resource_type='video', blank=True, null=True, help_text='Optional short product video')
     product_stock = models.IntegerField()
+    wholesale_stock = models.IntegerField(default=0, help_text='Number of full boxes available for wholesale') 
     is_new = models.BooleanField(default=False)
 
     @property
