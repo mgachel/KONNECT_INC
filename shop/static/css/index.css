@@ -1,100 +1,14 @@
-/* === CRITICAL: Tab Switching Logic === */
-.category-products {
-    display: none;  /* Hide all product sections by default */
-}
+/*
+ * index.css – Video / media-overlay styles only.
+ * All layout, card, tab, grid, and button styles live in base.html <style>.
+ * This file MUST NOT override them.
+ */
 
-.category-products.active {
-    display: block;  /* Show only the active one */
-}
-
-/* === Category Tabs Styling (fallback/override) === */
-.category-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    padding: 0 10px;
-}
-
-.category-tab {
-    padding: 10px 20px;
-    border: none;
-    background: transparent;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #666;
-    cursor: pointer;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.category-tab:hover {
-    color: #333;
-}
-
-.category-tab.active {
-    color: #2e7d32;
-    font-weight: 600;
-}
-
-/* Green underline for active tab */
-.category-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 3px;
-    background-color: #2e7d32;
-    border-radius: 2px;
-}
-
-/* === Products Grid === */
-.products-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 10px;
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 20px;
-}
-
-/* === Product Card - No card, just image + text === */
-.product-card {
-    background: none;
-    border: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-/* === Product Media Container (image + video) === */
+/* === Product Media Container (image + video overlay) === */
 .product-media {
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
-}
-
-/* Full image with rounded corners */
-.product-card img,
-.product-media img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    display: block;
-    border-radius: 12px;
-    transition: opacity 0.3s ease;
+    border-radius: 8px;
 }
 
 .product-media img.hidden {
@@ -108,9 +22,9 @@
 .product-video {
     display: none;
     width: 100%;
-    height: 320px;
+    height: 280px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .product-video.active {
@@ -180,99 +94,15 @@
     color: #003366;
 }
 
-/* Text directly below image, no background */
-.product-info {
-    padding: 12px 0 0 0;
-    background: none;
-}
-
-.product-card h4 {
-    font-size: 1.1rem;
-    color: #333;
-    margin: 0 0 4px 0;
-    font-weight: 700;
-}
-
-.product-card .price {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #555;
-    margin: 0 0 6px 0;
-}
-
-.product-card .stock {
-    font-size: 0.8rem;
-    color: #888;
-    margin: 0 0 10px 0;
-}
-
-.add-to-cart-btn {
-    padding: 10px 28px;
-    background-color: #001f3f;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    align-self: flex-start;
-}
-
-.add-to-cart-btn:hover {
-    background-color: #003366;
-}
-
-.no-products {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: #666;
-    padding: 40px 20px;
-}
-
-/* === Responsive adjustments === */
+/* === Responsive video height === */
 @media (max-width: 768px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .product-card img,
-    .product-media img {
-        height: 220px;
-    }
-
     .product-video {
         height: 220px;
-    }
-    
-    .product-info {
-        padding: 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .product-card img,
-    .product-media img {
-        height: 250px;
-    }
-
     .product-video {
         height: 250px;
-    }
-    
-    .category-tabs {
-        gap: 8px;
-    }
-    
-    .category-tab {
-        padding: 8px 15px;
-        font-size: 0.85rem;
     }
 }
